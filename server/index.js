@@ -17,6 +17,7 @@ const passport = require('passport')
 const localStrategy = require('passport-local').Strategy
 const authRoutes = require('./routes/auth');
 const User = require("./models/user");
+const cookieParser = require("cookie-parser");
 
 
 const MongoStore = require('connect-mongo');
@@ -24,8 +25,19 @@ const mongoString = 'mongodb+srv://jomin3:pfcHUWgM2oqzQtuo@cluster0.bumc5io.mong
 mongoose.connect(mongoString);
 const db = mongoose.connection;
 
+// const allowedOrigins = ['http://localhost:4200', 'http://localhost:5000'];
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// };
 
 const app = express();
+// app.use(cookieParser());
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }));
@@ -44,39 +56,5 @@ app.use(session({
   app.use(passport.session());
   
   app.use(authRoutes)
-
-//   app.post('/register', function (req, res) {
-//     User.register(
-//       new User({ 
-//         email: req.body.email, 
-//         username: req.body.username 
-//       }), req.body.password, function (err, msg) {
-//         if (err) {
-//           res.send(err);
-//         } else {
-//           res.send({ message: "Successful" });
-//         }
-//       }
-//     )
-//   })
-
-
-
-//   app.post('/login', passport.authenticate('local', { 
-//     failureRedirect: '/login-failure', 
-//     successRedirect: '/login-success'
-//   }), (err, req, res, next) => {
-//     if (err) next(err);
-//   });
-
-//   app.get('/login-failure', (req, res, next) => {
-//     console.log(req.session);
-//     res.send('Login Attempt Failed.');
-//   });  
-
-//   app.get('/login-success', (req, res, next) => {
-//     console.log(req.session);
-//     res.send('Login Attempt was successful.');
-//   });
   
   app.listen(8000, () => { console.log('Server started.') });
