@@ -21,7 +21,7 @@ exports.postlogin = (err, req, res, next) => {
 
 exports.loginFailure = (req, res, next) => {
     console.log(req.session);
-    res.send('Login Attempt Failed.');
+    res.send({message:'Login Attempt Failed.'});
   }
 
 exports.loginSuccess =  (req, res, next) => {
