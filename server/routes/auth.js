@@ -3,6 +3,9 @@ const passport = require('passport')
 const authController = require('../controllers/auth');
 const User = require('../models/user');
 const router = express.Router();
+const setResponseHeaders = require('../utils/setHeaders')
+
+router.get('/userSearch',authController.userSearch)
 
 router.post('/register',authController.register)
 
@@ -15,6 +18,5 @@ router.get('/login-failure',authController.loginFailure)
 
 router.get('/login-success',authController.loginSuccess)
 
-router.get('/userSearch',authController.userSearch)
 
 module.exports = router

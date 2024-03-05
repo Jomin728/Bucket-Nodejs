@@ -26,11 +26,14 @@ exports.loginFailure = (req, res, next) => {
 
 exports.loginSuccess =  (req, res, next) => {
     console.log(req.session);
-    res.send('Login Attempt was successful.');
+    console.log(req.cookies)
+    res.send({success:'Login Attempt was successful.'});
+    res.status(200).end()
   }
 
 exports.userSearch = async (req,res,next) => {
-  console.log(req.query)
+  console.log(req.cookies)
+  console.log(req.session)
   let result = await User.find({email:req.query.email})
   res.send(result)
   res.status(200).end()
