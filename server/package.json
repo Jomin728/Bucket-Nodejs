@@ -10,6 +10,7 @@
   "author": "jomin rajesh koottummel",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1573.0",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",

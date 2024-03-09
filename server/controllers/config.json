@@ -1,0 +1,8 @@
+{
+	"accessKeyId"		: "AKIA2KCF6ANL2GBWTQXZ",
+	"secretAccessKey"	: "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",
+	"region"			: "ap-south-1",
+	"apiVersions"		: {
+  		"s3"		: "2006-03-01"
+	}
+}

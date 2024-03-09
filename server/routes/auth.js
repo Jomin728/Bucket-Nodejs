@@ -21,7 +21,7 @@ router.get('/login-failure',authController.loginFailure)
 
 router.get('/login-success',authController.loginSuccess)
 
-router.post('/fileUpload',upload.any(),fileController.userFileUpload)
+router.post('/file-upload',upload.any(),fileController.userFileUpload)
 
 
 module.exports = router
