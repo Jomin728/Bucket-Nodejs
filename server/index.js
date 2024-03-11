@@ -39,6 +39,7 @@ const corsOptions = {
 };
 
 const app = express();
+// app.options('*', cors(corsOptions));
 // app.options('*', cors())
 app.use(cors(corsOptions))
 // app.use(setResponseHeaders)

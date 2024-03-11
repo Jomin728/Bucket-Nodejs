@@ -23,5 +23,8 @@ router.get('/login-success',authController.loginSuccess)
 
 router.post('/file-upload',upload.any(),fileController.userFileUpload)
 
+router.get('/file-details',fileController.getUserFileData)
+
+router.get('/file-download',fileController.userFileDownload)
 
 module.exports = router
