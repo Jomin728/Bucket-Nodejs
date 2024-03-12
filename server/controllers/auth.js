@@ -15,6 +15,11 @@ exports.register = (req,res,next) => {
       )
 }
 
+exports.getUserInfo = (req,res,next) => {
+  res.send(req.user)
+  res.status(200).end()
+}
+
 exports.postlogin = (err, req, res, next) => {
     if (err) next(err);
   }

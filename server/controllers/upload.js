@@ -99,11 +99,11 @@ exports.userFileDownload = async (req,res,next) =>
   Key:key
  }
   res.attachment(key);
-  debugger
+  
   // res.writeHead(200, {
   //   'Content-Type': 'image/png'
   // });
   let fileToSend = await getFileFromS3(key);
-  debugger
+  
   fileToSend.pipe(res);
 }

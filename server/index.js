@@ -39,8 +39,16 @@ const corsOptions = {
 };
 
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server,{ cors:{ origin: "http://localhost:4200", credentials: true }
+});
+
+global.io = io;
+
+
 // app.options('*', cors(corsOptions));
 // app.options('*', cors())
+
 app.use(cors(corsOptions))
 // app.use(setResponseHeaders)
 app.use(cookieParser());
@@ -64,5 +72,13 @@ app.use(session({
   app.use(passport.session());
   
   app.use(authRoutes)
+
+  io.on('connection',socket => {
+    let id =socket.id
+    console.log('user connected');
+    socket.on('disconnect', () => {
+      socket.broadcast.emit('clientdisconnect', id);
+    });
+  })
   
-  app.listen(8000, () => { console.log('Server started.') });
+  server.listen(8000, () => { console.log('Server started.') });
