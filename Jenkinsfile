@@ -11,9 +11,19 @@ pipeline {
         {
             steps {
                sh "pwd"
-               sh "cd server"
+               
                sh "docker login --username='jomin729' --password='Jomin729@'"
-               sh "sudo docker build -t jomin729/nodeservice ."
+               dir('server') {
+                   sh "pwd"
+                   sh "ls"
+                   sh "docker build -t jomin729/nodeservice ."
+                 }
+            }
+        }
+        stage('Push Image to Docker Hub')
+        {
+            steps {
+                sh "docker push jomin729/nodeservice"
             }
         }
     }
