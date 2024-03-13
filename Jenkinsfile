@@ -29,6 +29,7 @@ pipeline {
         stage('SSH into master node')
         {
             steps{
+                 sh "chmod 400 'jomin1.pem'"
                  sh "ssh -i 'jomin1.pem' ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com"
             }
         }
