@@ -26,5 +26,11 @@ pipeline {
                 sh "docker push jomin729/nodeservice"
             }
         }
+        stage('SSH into master node')
+        {
+            steps{
+                 sh "ssh -i 'jomin1.pem' ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com"
+            }
+        }
     }
 }
