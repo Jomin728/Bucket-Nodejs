@@ -26,11 +26,25 @@ pipeline {
                 sh "docker push jomin729/nodeservice"
             }
         }
+        stage('Copy kube yaml Configurations')
+        {
+            steps{
+                sh "chmod 400 'jomin1.pem'"
+                sh "scp -i 'jomin1.pem' server/server-deployment.yaml ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com:~/."
+                sh "scp -i 'jomin1.pem' server/server-service.yaml ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com:~/."
+                sh "scp -i 'jomin1.pem' server/ingress-controller.yaml ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com:~/."
+            }
+        }
         stage('SSH into master node')
         {
             steps{
                  sh "chmod 400 'jomin1.pem'"
                  sh "ssh -i 'jomin1.pem' ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com"
+                 sh "sudo su"
+                 sh "kubectl delete deployment node-api"
+                 sh "kubectl apply -f server-deployment.yaml"
+                 sh "kubectl apply -f server-service.yaml"
+                 sh "kubectl apply -f ingress-controller.yaml"
             }
         }
     }
