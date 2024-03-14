@@ -25,22 +25,22 @@ mongoose.connect(mongoString);
 const db = mongoose.connection;
 
 const allowedOrigins = ['http://localhost:4200', 'http://localhost:5000'];
+// function (origin, callback) {
+//   if (allowedOrigins.includes(origin)) {
+//       console.log(origin)
+//     callback(null, true);
+//   } else {
+//     callback(new Error('Not allowed by CORS'));
+//   }
+// }
 const corsOptions = {
-  origin: function (origin, callback) {
-    
-    if (allowedOrigins.includes(origin)) {
-        console.log(origin)
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin:true,
   credentials: true
 };
 
 const app = express();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server,{ cors:{ origin: "http://localhost:4200", credentials: true }
+const io = require('socket.io')(server,{ cors:{ origin: "*", credentials: true }
 });
 
 global.io = io;

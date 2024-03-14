@@ -9,31 +9,31 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' })
 const setResponseHeaders = require('../utils/setHeaders')
 
-router.get('/userSearch',authController.userSearch)
+router.get('/api/userSearch',authController.userSearch)
 
-router.post('/register',authController.register)
+router.post('/api/register',authController.register)
 
-router.post('/login', passport.authenticate('local', { 
-    failureRedirect: '/login-failure', 
-    successRedirect: '/login-success'
+router.post('/api/login', passport.authenticate('local', { 
+    failureRedirect: '/api/login-failure', 
+    successRedirect: '/api/login-success'
   }),authController.postlogin)
 
-router.get('/login-failure',authController.loginFailure)
+router.get('/api/login-failure',authController.loginFailure)
 
-router.get('/login-success',authController.loginSuccess)
+router.get('/api/login-success',authController.loginSuccess)
 
-router.post('/file-upload',upload.any(),fileController.userFileUpload)
+router.post('/api/file-upload',upload.any(),fileController.userFileUpload)
 
-router.get('/file-details',fileController.getUserFileData)
+router.get('/api/file-details',fileController.getUserFileData)
 
-router.get('/file-download',fileController.userFileDownload)
+router.get('/api/file-download',fileController.userFileDownload)
 
-router.get('/user-info',authController.getUserInfo)
+router.get('/api/user-info',authController.getUserInfo)
 
-router.post('/share-file',shareController.shareFile)
+router.post('/api/share-file',shareController.shareFile)
 
-router.get('/sharedfile-details',shareController.getSharedFiledetails)
+router.get('/api/sharedfile-details',shareController.getSharedFiledetails)
 
-router.get('/imagefile-data',shareController.getImageData)
+router.get('/api/imagefile-data',shareController.getImageData)
 
 module.exports = router
