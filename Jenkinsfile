@@ -40,7 +40,6 @@ pipeline {
             steps{
                  sh "chmod 400 'jomin1.pem'"
                  sh "ssh -i 'jomin1.pem' ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com"
-                 sh "sudo su"
                  sh "kubectl delete deployment node-api"
                  sh "kubectl apply -f server-deployment.yaml"
                  sh "kubectl apply -f server-service.yaml"
