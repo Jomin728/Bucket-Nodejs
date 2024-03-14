@@ -38,12 +38,12 @@ pipeline {
         stage('SSH into master node')
         {
             steps{
-                 sh "chmod 400 'jomin1.pem'"
-                 sh "ssh -i 'jomin1.pem' ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com"
-                 sh "kubectl delete deployment node-api"
-                 sh "kubectl apply -f server-deployment.yaml"
-                 sh "kubectl apply -f server-service.yaml"
-                 sh "kubectl apply -f ingress-controller.yaml"
+                    script {
+                     sshagent(credentials : ['masternode']) {
+                        sh "echo pwd"
+                        sh "ssh -t -t ubuntu@ec2-3-83-241-86.compute-1.amazonaws.com 'echo pwd && kubectl get pods && kubectl delete deployment node-api && kubectl apply -f server-deployment.yaml && kubectl apply -f server-service.yaml && kubectl apply -f ingress-controller.yaml'"
+                    }
+                 }
             }
         }
     }
