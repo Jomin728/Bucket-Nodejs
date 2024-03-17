@@ -9,9 +9,13 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' })
 const setResponseHeaders = require('../utils/setHeaders')
 
+router.post('/api/logout',authController.logout)
+
 router.get('/api/userSearch',authController.userSearch)
 
 router.post('/api/register',authController.register)
+
+router.get('/api/route-guard',authController.checkAuth)
 
 router.post('/api/login', passport.authenticate('local', { 
     failureRedirect: '/api/login-failure', 
@@ -35,5 +39,6 @@ router.post('/api/share-file',shareController.shareFile)
 router.get('/api/sharedfile-details',shareController.getSharedFiledetails)
 
 router.get('/api/imagefile-data',shareController.getImageData)
+
 
 module.exports = router

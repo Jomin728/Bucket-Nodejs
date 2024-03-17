@@ -44,3 +44,38 @@ exports.userSearch = async (req,res,next) => {
   res.status(200).end()
   console.log(result)
 }
+
+exports.checkAuth = async (req,res,next) => {
+  allowedRoutes = ['login','register','landingPage']
+  protectedRoute = ['home']
+  debugger
+  if(req.user == undefined && protectedRoute.includes(req.query.route))
+  {
+    res.send({redirectTo:'login'})
+    res.status(200).end()  
+
+  }
+  else if(req.user!=undefined && allowedRoutes.includes(req.query.route))
+  {
+    res.send({redirectTo:'home'})
+    res.status(200).end()  
+
+  }
+  else
+  {
+    res.send({redirectTo:''})
+  }
+}
+
+exports.logout = async (req,res,next) => {
+  console.log(req.cookies)
+ await req.logout(function(err)
+  {
+    if(err)
+    {
+      console.log(err)
+    }
+  });
+  res.clearCookie("connect.sid", {path:"/",httpOnly:true})
+  res.status(200).end()  
+}
