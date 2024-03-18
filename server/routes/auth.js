@@ -13,7 +13,10 @@ router.post('/api/logout',authController.logout)
 
 router.get('/api/userSearch',authController.userSearch)
 
-router.post('/api/register',authController.register)
+router.post('/api/register',authController.register,passport.authenticate('local', { 
+  failureRedirect: '/api/login-failure', 
+  successRedirect: '/api/login-success'
+}),authController.postlogin)
 
 router.get('/api/route-guard',authController.checkAuth)
 

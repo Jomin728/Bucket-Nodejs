@@ -9,14 +9,20 @@ exports.register = (req,res,next) => {
           if (err) {
             res.send(err);
           } else {
-            res.send({ message: "Successful" });
+            next();
+            // res.send({ message: "Successful" });
           }
         }
       )
 }
 
 exports.getUserInfo = (req,res,next) => {
+  console.log("---------------------------userinfo----------------------------")
+  console.log(req.user)
+  if(req.user)
   res.send(req.user)
+  else
+  res.send({})
   res.status(200).end()
 }
 
