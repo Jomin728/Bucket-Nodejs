@@ -126,11 +126,17 @@ exports.userFileDownload = async (req,res,next) =>
 }
 
 exports.searchFiles = async (req,res,next) => {
-  let result = await fileDataModel
+  let result = []
+  result = await fileDataModel
   .find(
-      { $text : { $search : req.query.searchText } }, 
+      { $text : { $search : req.query.searchkey } }, 
       { score : { $meta: "textScore" } }
   )
   .sort({ score : { $meta : 'textScore' } })
+
+  console.log(result)
+
+  res.send(result)
+  res.status(200).end()
 
 }

@@ -40,5 +40,7 @@ router.get('/api/sharedfile-details',shareController.getSharedFiledetails)
 
 router.get('/api/imagefile-data',shareController.getImageData)
 
+router.get('/api/file-search',fileController.searchFiles)
+
 
 module.exports = router
