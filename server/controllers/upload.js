@@ -45,7 +45,7 @@ exports.userFileUpload = async (req,res,next) => {
     console.log(req.session,req.user)
     console.log(req.cookies)
     let filedata=req.files[0]
-    const objectId = new ObjectId('61dc2d31bbe643fc32022a5f');
+    // const objectId = new ObjectId('61dc2d31bbe643fc32022a5f');
     let fileModel = {
         username:req.user.username,
         filename:filedata.originalname,
@@ -75,7 +75,24 @@ exports.userFileUpload = async (req,res,next) => {
             res.send({...response['0']['_doc']})
             res.status(200).end()        
            })
+        
       });
+      let dirPath = path.join(__dirname,'../uploads')
+      fs.readdir(dirPath,(err,files)=>{
+        files.forEach((value)=>{
+          if(value == filedata.filename)
+          {
+          let filePath = path.join(dirPath,value)
+          fs.unlink(filePath,(err)=>{
+            if(err)
+            console.log(err)
+            else
+            console.log(filePath+ ' is deleted')
+          })
+          }
+        })
+      })
+    console.log(dirPath)
 
 }
 const constantParams = {
@@ -106,4 +123,14 @@ exports.userFileDownload = async (req,res,next) =>
   let fileToSend = await getFileFromS3(key);
   
   fileToSend.pipe(res);
+}
+
+exports.searchFiles = async (req,res,next) => {
+  let result = await fileDataModel
+  .find(
+      { $text : { $search : req.query.searchText } }, 
+      { score : { $meta: "textScore" } }
+  )
+  .sort({ score : { $meta : 'textScore' } })
+
 }
