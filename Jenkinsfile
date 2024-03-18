@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Cloning Git repository') {
             steps {
+                cleanWs()
                 git branch:'main',credentialsId:'4ed263bf-ff3c-4b6b-b14f-b453dc1e16c5',url: 'https://github.com/Jomin728/ShepherdAI-Nodejs-Microservices.git'
                 
             }
@@ -16,7 +17,7 @@ pipeline {
                dir('server') {
                    sh "pwd"
                    sh "ls"
-                   sh "docker build -t jomin729/nodeservice ."
+                   sh "docker build --no-cache -t jomin729/nodeservice ."
                  }
             }
         }
@@ -45,6 +46,17 @@ pipeline {
                     }
                  }
             }
+        }
+    }
+        post {
+        // Clean after build
+        always {
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
         }
     }
 }
