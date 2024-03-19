@@ -83,5 +83,6 @@ exports.logout = async (req,res,next) => {
     }
   });
   res.clearCookie("connect.sid", {path:"/",httpOnly:true})
+  res.send({message:'logged-out'})
   res.status(200).end()  
 }

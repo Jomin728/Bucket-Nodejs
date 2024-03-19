@@ -4,7 +4,7 @@
   "description": "nodejs services for shepardAI",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watchAll",
     "start": "node --inspect index.js"
   },
   "author": "jomin rajesh koottummel",
@@ -34,5 +34,9 @@
     "passport-local-mongoose": "^8.0.0",
     "path": "^0.12.7",
     "socket.io": "^4.7.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
   }
 }
