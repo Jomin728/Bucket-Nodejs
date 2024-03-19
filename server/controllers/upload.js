@@ -140,3 +140,15 @@ exports.searchFiles = async (req,res,next) => {
   res.status(200).end()
 
 }
+
+exports.getPresignedUrl = async (req,res,next) => {
+  var presignedGETURL = await s3.getSignedUrl('getObject', {
+    Bucket: 'bucket-box-jomin',
+    Key: req.query.key,
+    Expires: 10000 //time to expire in seconds
+});
+
+  res.send({url:presignedGETURL})
+  res.status(200).end()
+
+}

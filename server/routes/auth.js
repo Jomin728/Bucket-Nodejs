@@ -20,6 +20,8 @@ router.post('/api/register',authController.register,passport.authenticate('local
 
 router.get('/api/route-guard',authController.checkAuth)
 
+router.get('/api/get-url',fileController.getPresignedUrl)
+
 router.post('/api/login', passport.authenticate('local', { 
     failureRedirect: '/api/login-failure', 
     successRedirect: '/api/login-success'
