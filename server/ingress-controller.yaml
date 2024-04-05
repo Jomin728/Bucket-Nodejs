@@ -9,6 +9,13 @@ spec:
   - host: ec2-3-83-241-86.compute-1.amazonaws.com
     http:
       paths:
+      - path: /notificationApi
+        pathType: Prefix
+        backend:
+          service:
+            name: notification-api
+            port:
+              number: 3000
       - path: /api
         pathType: Prefix
         backend:
