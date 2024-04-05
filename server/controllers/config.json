@@ -1,7 +1,7 @@
 {
-	"accessKeyId"		: "AKIA2KCF6ANLZXQMPQOC",
-	"secretAccessKey"	: "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",
-	"region"			: "ap-south-1",
+	"accessKeyId"		: "AKIA2KCF6ANLSLQY24RW",
+	"secretAccessKey"	: "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",
+	"region"			: "us-east-1",
 	"apiVersions"		: {
   		"s3"		: "2006-03-01"
 	}
