@@ -1,8 +1,0 @@
-{
-	"accessKeyId"		: "AKIA2KCF6ANLSLQY24RW",
-	"secretAccessKey"	: "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",
-	"region"			: "us-east-1",
-	"apiVersions"		: {
-  		"s3"		: "2006-03-01"
-	}
-}
